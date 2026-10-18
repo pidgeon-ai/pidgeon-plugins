@@ -1,0 +1,13 @@
+interface:
+  display_name: 'Pidgeon'
+  short_description: 'Give an agent its own email address'
+  default_prompt: 'Use $pidgeon to list my addresses and read the newest conversations.'
+dependencies:
+  tools:
+    - type: 'mcp'
+      value: 'pidgeon'
+      description: "Pidgeon's hosted MCP server"
+      transport: 'streamable_http'
+      url: 'https://pidgeon.ai/api/mcp'
+policy:
+  allow_implicit_invocation: true

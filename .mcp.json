@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "pidgeon": {
+      "type": "http",
+      "url": "https://pidgeon.ai/api/mcp",
+      "bearer_token_env_var": "PIDGEON_API_KEY"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "pidgeon",
+  "version": "1.13.0",
+  "description": "Mailboxes for agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
+  "author": {
+    "name": "Pidgeon",
+    "email": "support@pidgeon.ai",
+    "url": "https://pidgeon.ai"
+  },
+  "homepage": "https://pidgeon.ai/docs/mcp",
+  "repository": "https://github.com/pidgeon-ai/pidgeon-plugins",
+  "license": "MIT",
+  "keywords": [
+    "email",
+    "mailbox",
+    "webhooks",
+    "agents",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Pidgeon",
+    "shortDescription": "Mailboxes for agents",
+    "longDescription": "Give your agent its own email address. It can create addresses, read and search conversations, send and reply, wait for a verification code to arrive, and file what it has handled. Every tool goes through Pidgeon's hosted MCP server with your API key, so the agent can reach only the addresses that key reaches.",
+    "developerName": "Pidgeon",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://pidgeon.ai",
+    "privacyPolicyURL": "https://pidgeon.ai/legal/privacy",
+    "termsOfServiceURL": "https://pidgeon.ai/legal/terms",
+    "defaultPrompt": [
+      "List my Pidgeon addresses and summarise the newest conversations.",
+      "Create an address for this project and wait for the verification email.",
+      "Reply to the latest message in my support inbox."
+    ],
+    "brandColor": "#13181D",
+    "composerIcon": "./assets/logo.svg",
+    "logo": "./assets/logo.svg"
+  }
+}

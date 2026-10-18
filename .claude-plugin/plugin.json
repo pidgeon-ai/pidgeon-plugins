@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "pidgeon",
+  "displayName": "Pidgeon",
+  "version": "1.13.0",
+  "description": "Mailboxes for agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
+  "author": {
+    "name": "Pidgeon",
+    "email": "support@pidgeon.ai",
+    "url": "https://pidgeon.ai"
+  },
+  "homepage": "https://pidgeon.ai/docs/mcp",
+  "repository": "https://github.com/pidgeon-ai/pidgeon-plugins",
+  "license": "MIT",
+  "keywords": ["email", "mailbox", "webhooks", "agents", "mcp"],
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "Pidgeon API key",
+      "description": "From https://pidgeon.ai/app/developers/keys. Give it the narrowest access the agent needs — this hands it to a model.",
+      "sensitive": true
+    }
+  },
+  "mcpServers": {
+    "pidgeon": {
+      "type": "http",
+      "url": "https://pidgeon.ai/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${user_config.api_key}"
+      }
+    }
+  }
+}

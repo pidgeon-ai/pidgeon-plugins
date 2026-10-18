@@ -1,0 +1,21 @@
+{
+  "name": "pidgeon",
+  "version": "1.13.0",
+  "description": "Mailboxes for agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
+  "mcpServers": {
+    "pidgeon": {
+      "httpUrl": "https://pidgeon.ai/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${PIDGEON_API_KEY}"
+      }
+    }
+  },
+  "settings": [
+    {
+      "name": "Pidgeon API key",
+      "description": "From https://pidgeon.ai/app/developers/keys. Give it the narrowest access the agent needs — this hands it to a model.",
+      "envVar": "PIDGEON_API_KEY",
+      "sensitive": true
+    }
+  ]
+}

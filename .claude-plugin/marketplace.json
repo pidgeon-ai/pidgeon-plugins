@@ -1,0 +1,18 @@
+{
+  "name": "pidgeon",
+  "owner": {
+    "name": "Pidgeon",
+    "email": "support@pidgeon.ai",
+    "url": "https://pidgeon.ai"
+  },
+  "description": "Pidgeon's plugin: the hosted MCP server and the skill, from one install.",
+  "plugins": [
+    {
+      "name": "pidgeon",
+      "source": "./",
+      "description": "Give an agent its own email address. Every tool of the hosted MCP server, plus the skill that explains how to get a key.",
+      "category": "productivity",
+      "tags": ["email", "mailbox", "webhooks", "agents", "mcp"]
+    }
+  ]
+}

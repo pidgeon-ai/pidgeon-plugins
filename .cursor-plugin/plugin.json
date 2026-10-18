@@ -1,0 +1,42 @@
+{
+  "name": "pidgeon",
+  "version": "1.13.0",
+  "description": "Mailboxes for agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
+  "author": {
+    "name": "Pidgeon",
+    "email": "support@pidgeon.ai"
+  },
+  "homepage": "https://pidgeon.ai/docs/mcp",
+  "repository": "https://github.com/pidgeon-ai/pidgeon-plugins",
+  "license": "MIT",
+  "keywords": [
+    "email",
+    "mailbox",
+    "webhooks",
+    "agents",
+    "mcp"
+  ],
+  "logo": "assets/logo.svg",
+  "skills": "./skills/",
+  "mcpServers": {
+    "pidgeon": {
+      "url": "https://pidgeon.ai/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${PIDGEON_API_KEY}"
+      }
+    }
+  },
+  "variables": {
+    "type": "object",
+    "properties": {
+      "PIDGEON_API_KEY": {
+        "type": "string",
+        "title": "Pidgeon API key",
+        "description": "From https://pidgeon.ai/app/developers/keys. Give it the narrowest access the agent needs — this hands it to a model."
+      }
+    },
+    "required": [
+      "PIDGEON_API_KEY"
+    ]
+  }
+}
