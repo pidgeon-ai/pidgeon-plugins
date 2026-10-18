@@ -22,7 +22,7 @@
     "pidgeon": {
       "url": "https://pidgeon.ai/api/mcp",
       "headers": {
-        "Authorization": "Bearer ${PIDGEON_API_KEY}"
+        "x-api-key": "${PIDGEON_API_KEY}"
       }
     }
   },
@@ -32,11 +32,8 @@
       "PIDGEON_API_KEY": {
         "type": "string",
         "title": "Pidgeon API key",
-        "description": "From https://pidgeon.ai/app/developers/keys. Give it the narrowest access the agent needs — this hands it to a model."
+        "description": "Optional. Leave it empty and Cursor signs you in to Pidgeon instead. For an agent with nobody there to sign in, a key from https://pidgeon.ai/app/developers/keys, with the narrowest access the agent needs."
       }
-    },
-    "required": [
-      "PIDGEON_API_KEY"
-    ]
+    }
   }
 }

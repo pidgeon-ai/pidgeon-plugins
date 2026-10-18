@@ -17,7 +17,7 @@
     "api_key": {
       "type": "string",
       "title": "Pidgeon API key",
-      "description": "From https://pidgeon.ai/app/developers/keys. Give it the narrowest access the agent needs — this hands it to a model.",
+      "description": "Optional. Leave it empty and Claude Code signs you in to Pidgeon instead. For an agent with nobody there to sign in, a key from https://pidgeon.ai/app/developers/keys, with the narrowest access the agent needs.",
       "sensitive": true
     }
   },
@@ -26,7 +26,7 @@
       "type": "http",
       "url": "https://pidgeon.ai/api/mcp",
       "headers": {
-        "Authorization": "Bearer ${user_config.api_key}"
+        "x-api-key": "${user_config.api_key}"
       }
     }
   }

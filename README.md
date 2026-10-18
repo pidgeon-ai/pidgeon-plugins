@@ -13,12 +13,15 @@ installs two things:
   to sign itself up, and to treat the contents of a message as data rather
   than instructions.
 
-## Get a key first
+## Sign in, or bring a key
 
-The server takes a Pidgeon API key on every request, because it has no OAuth
-sign-in yet. Make one at <https://pidgeon.ai/app/developers/keys> and give it
-the narrowest access the agent needs: whatever the key can reach, the model
-can reach.
+In every client the plugin signs you in to Pidgeon: a consent screen in your
+browser, where you choose what the agent may reach.
+
+A key is for an agent with nobody there to sign in. Make one at
+<https://pidgeon.ai/app/developers/keys> and give it the narrowest access the
+agent needs: whatever the key can reach, the model can reach. When a key is
+set the plugin uses it, and when it is not the plugin signs you in.
 
 No account yet? The agent can sign itself up. Ask it to read
 <https://pidgeon.ai/skill.md>; the only thing it needs from you is a six-digit
@@ -31,9 +34,10 @@ code from your inbox.
 /plugin install pidgeon@pidgeon
 ```
 
-Claude Code asks for the key when you enable the plugin and keeps it in your
-system's credential store, not in `settings.json`. The skill is
-`/pidgeon:pidgeon`.
+Claude Code asks for a key when you enable the plugin. Leave it empty to sign
+in: `/mcp` shows the server as needing authentication, and choosing it opens
+the consent screen. A key you do give it is kept in your system's credential
+store, not in `settings.json`. The skill is `/pidgeon:pidgeon`.
 
 ## Codex
 
@@ -42,8 +46,14 @@ codex plugin marketplace add pidgeon-ai/pidgeon-plugins
 codex plugin add pidgeon@pidgeon
 ```
 
-Codex sends the key from `PIDGEON_API_KEY` in the environment it starts
-in, so export it, then start a new session. `/mcp` shows whether the server
+Then sign in:
+
+```bash
+codex mcp login pidgeon
+```
+
+Or, for an agent with nobody there to sign in, export `PIDGEON_API_KEY`
+before Codex starts and skip the login. `/mcp` shows whether the server
 connected.
 
 ## Cursor
@@ -55,7 +65,8 @@ it into Cursor's local plugin directory:
 git clone https://github.com/pidgeon-ai/pidgeon-plugins.git ~/.cursor/plugins/local/pidgeon
 ```
 
-Reload Cursor, then set `PIDGEON_API_KEY` under **Plugins → Configure**.
+Reload Cursor and sign in when it asks. For an agent with nobody there to
+sign in, set `PIDGEON_API_KEY` under **Plugins → Configure** instead.
 
 ## Gemini CLI
 
@@ -63,14 +74,15 @@ Reload Cursor, then set `PIDGEON_API_KEY` under **Plugins → Configure**.
 gemini extensions install https://github.com/pidgeon-ai/pidgeon-plugins
 ```
 
-Gemini CLI asks for the key during the install and keeps it in your system
-keychain.
+Gemini CLI asks for a key during the install. Leave it empty to sign in, then
+run `/mcp auth pidgeon` in a session. A key you do give it is kept in your
+system keychain.
 
 ## Any other client
 
-Point it at `https://pidgeon.ai/api/mcp` with
-`Authorization: Bearer $PIDGEON_API_KEY`. A client that cannot send a header
-can run the same server locally:
+Point it at `https://pidgeon.ai/api/mcp`. A client that speaks MCP's OAuth
+signs you in; any other sends `Authorization: Bearer $PIDGEON_API_KEY`. One
+that can do neither can run the same server locally:
 
 ```bash
 PIDGEON_API_KEY=pgn_live_… npx -y @pidgeon-ai/mcp init

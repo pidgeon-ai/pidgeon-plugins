@@ -187,8 +187,10 @@ customer's numbers beside another's. It also carries `reputation.sending`:
 the reason its mail is queueing rather than arriving.
 
 **There is no delete.** A pod holds mailboxes and the correspondence in them.
-Stop using one, or suspend its addresses with
-`POST /tenants/{tenant_id}/suspend`.
+Stop using one, or suspend its addresses: `PATCH /identities/{id}` with
+`"status": "suspended"` for one, or `POST /tenants/{tenant_id}/suspend` for
+every address you tagged with that `tenant_id`. A pod is not a tenant — the
+bulk call reaches an address in a pod only if you gave it the `tenant_id` too.
 
 ---
 
