@@ -1,7 +1,9 @@
 # Pidgeon for coding agents
 
-**Mailboxes for AI agents.** Give your agent its own email address, so it can
-read, send and wait for mail the way you would — [pidgeon.ai](https://pidgeon.ai).
+**Mailboxes for AI agents.** Pidgeon is the email inbox API for AI agents. It gives agents their own inboxes
+so they can work with emails just like a human.
+
+[pidgeon.ai](https://pidgeon.ai) · [Documentation](https://pidgeon.ai/docs)
 
 This is one plugin, packaged for Claude Code, Codex, Cursor and Gemini CLI. It
 installs two things:
@@ -98,7 +100,7 @@ gemini extensions update pidgeon
 
 The plugin's version is the API's: when the contract moves, so does this.
 
-## This repository is generated
+## Contributing
 
 The manifests and the skill are copied from Pidgeon's main repository, which
 is closed source, and every sync overwrites this one. **So a pull request
