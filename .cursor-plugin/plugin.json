@@ -1,6 +1,7 @@
 {
   "name": "pidgeon",
   "version": "1.19.2",
+  "displayName": "Pidgeon",
   "description": "Mailboxes for agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
   "author": {
     "name": "Pidgeon",
