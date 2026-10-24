@@ -258,10 +258,28 @@ any delivery can be replayed from the log for ninety days.
 
 ## 7. Things worth knowing before you start
 
-- **Your key may not be allowed to send.** A key can be scoped to read and not
-  send, and an address can carry its own send rules. `list_send_rules` tells
-  you why a send was refused; treat a refusal as a decision somebody made, not
-  as an error to retry around.
+- **Your key may not be allowed to send.** A key has one of four levels:
+  `read`, `draft`, `send` or `admin`. `GET /me` says which yours is. A `draft`
+  key ("Read and draft") manages the inbox and writes drafts, and every send,
+  reply and forward answers `403`: that is your person choosing to approve
+  what you write. Save the reply with `create_draft` (`POST /drafts`, with
+  `in_reply_to`) and tell them it is waiting; they send it from Drafts. An
+  address can also carry its own send rules, and `list_send_rules` tells you
+  why a send was refused. Treat a refusal as a decision somebody made, not as
+  an error to retry around.
+- **Test keys send nothing.** A `pgn_test_` key runs the whole pipeline —
+  threads, events, webhooks, the Firewall — and no mail leaves Pidgeon or
+  counts against the plan. `POST /test/inbound` plays the other side. Use one
+  in CI.
+- **Rotate a key without breaking it.** `POST /api-keys/{id}/rotate` gives the
+  same key a new secret; its id, reach, level and the keys it minted stay.
+  `grace_period_seconds` (up to 86400) keeps the old secret working while you
+  redeploy.
+- **Mail can carry typed data, and says who sent it.** Every send and draft
+  takes `data: { schema, body }`: JSON that travels beside the text as its own
+  MIME part, for the software on the other end. Every message has `sender`,
+  with `kind` `person`, `agent` or `service`, and `on_behalf_of`, the
+  account's name. Read `data` rather than parsing prose when it is there.
 - **A new account sends a little and earns its way up.** Nobody can make a
   brand-new domain trustworthy overnight, so there is a daily allowance that
   rises as the mail you send gets delivered and read.
