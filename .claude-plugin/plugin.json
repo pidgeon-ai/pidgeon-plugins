@@ -3,7 +3,7 @@
   "name": "pidgeon",
   "displayName": "Pidgeon",
   "version": "1.30.0",
-  "description": "Mailboxes for agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
+  "description": "Email inboxes for AI agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
   "author": {
     "name": "Pidgeon",
     "email": "support@pidgeon.ai",

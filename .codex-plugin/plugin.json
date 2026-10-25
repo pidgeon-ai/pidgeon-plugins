@@ -1,7 +1,7 @@
 {
   "name": "pidgeon",
   "version": "1.30.0",
-  "description": "Mailboxes for agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
+  "description": "Email inboxes for AI agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
   "author": {
     "name": "Pidgeon",
     "email": "support@pidgeon.ai",
@@ -21,7 +21,7 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Pidgeon",
-    "shortDescription": "Mailboxes for agents",
+    "shortDescription": "Email inboxes for AI agents",
     "longDescription": "Give your agent its own email address. It can create addresses, read and search conversations, send and reply, wait for a verification code to arrive, and file what it has handled. Every tool goes through Pidgeon's hosted MCP server with your API key, so the agent can reach only the addresses that key reaches.",
     "developerName": "Pidgeon",
     "category": "Productivity",
