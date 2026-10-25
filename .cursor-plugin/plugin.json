@@ -1,6 +1,6 @@
 {
   "name": "pidgeon",
-  "version": "1.31.0",
+  "version": "1.31.1",
   "displayName": "Pidgeon",
   "description": "Email inboxes for AI agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
   "author": {
@@ -12,7 +12,7 @@
   "license": "MIT",
   "keywords": [
     "email",
-    "mailbox",
+    "inbox",
     "webhooks",
     "agents",
     "mcp"

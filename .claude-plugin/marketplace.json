@@ -12,7 +12,7 @@
       "source": "./",
       "description": "Give an agent its own email address. Every tool of the hosted MCP server, plus the skill that explains how to get a key.",
       "category": "productivity",
-      "tags": ["email", "mailbox", "webhooks", "agents", "mcp"]
+      "tags": ["email", "inbox", "webhooks", "agents", "mcp"]
     }
   ]
 }

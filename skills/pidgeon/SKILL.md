@@ -1,6 +1,6 @@
 ---
 name: pidgeon
-description: Give an agent its own email address with Pidgeon — create mailboxes, read threads, send mail, and receive arriving mail as signed webhooks. Use when an agent needs to send or receive email under an address a human owns.
+description: Give an agent its own email address with Pidgeon — create inboxes, read threads, send mail, and receive arriving mail as signed webhooks. Use when an agent needs to send or receive email under an address a human owns.
 ---
 
 # Pidgeon — give yourself an inbox
@@ -32,7 +32,7 @@ curl -X POST https://pidgeon.ai/api/v1/agent/signup \
 ```
 
 That answers with `signup_id` and your address — `scout@pidgeon.email` — and
-**the mailbox is live immediately**. Mail sent to it arrives now. You cannot
+**the inbox is live immediately**. Mail sent to it arrives now. You cannot
 send yet, which is the next call.
 
 A six-digit code goes to the human's address. Ask them for it, then:
@@ -136,8 +136,8 @@ Or use the REST API directly. The full OpenAPI document is at
 | `list_receive_rules` | The rules that decide what reaches one address — reject, spam, trash, archive or inbox, per sender or per domain — and its `receive_policy`.                                                               |
 | `list_folders`       | Every folder of one address with its counts.                                                                                                                                                               |
 | `list_folder`        | One folder of one address, newest first, a conversation per row — where `list_threads` says which conversations exist, this says where they are filed and what they look like in a list.                   |
-| `list_changes`       | Everything that moved in one mailbox since a `sync_cursor`, arrivals included, so a long-running agent does not re-read a folder to find one new message.                                                  |
-| `list_events`        | Every event across every mailbox this credential reaches — mail received, sent, delivered, bounced, filed.                                                                                                 |
+| `list_changes`       | Everything that moved in one inbox since a `sync_cursor`, arrivals included, so a long-running agent does not re-read a folder to find one new message.                                                    |
+| `list_events`        | Every event across every address this credential reaches — mail received, sent, delivered, bounced, filed.                                                                                                 |
 | `list_labels`        | Labels belong to an address, not to the workspace, so the same name on three addresses is three labels with three ids.                                                                                     |
 | `create_label`       | A label on one address.                                                                                                                                                                                    |
 | `apply_label`        | The label has to belong to the same address the conversation is in — `list_labels` for that address gives you the right id.                                                                                |
@@ -188,7 +188,7 @@ customer's numbers beside another's. It also carries `reputation.sending`:
 `paused` means the provider has suspended that pod, and nobody else, which is
 the reason its mail is queueing rather than arriving.
 
-**There is no delete.** A pod holds mailboxes and the correspondence in them.
+**There is no delete.** A pod holds inboxes and the correspondence in them.
 Stop using one, or suspend its addresses: `PATCH /identities/{id}` with
 `"status": "suspended"` for one, or `POST /tenants/{tenant_id}/suspend` for
 every address you tagged with that `tenant_id`. A pod is not a tenant — the
@@ -289,7 +289,7 @@ any delivery can be replayed from the log for ninety days.
 - **Addresses can be patterns.** Past a point, `invoice-*@yourdomain.com` is
   one rule rather than ten thousand rows. Ask for a pattern before you create
   addresses in a loop.
-- **A person may be reading this mailbox too.** That is the point of it. Do not
+- **A person may be reading this inbox too.** That is the point of it. Do not
   assume you are the only participant in a thread, and do not delete what you
   did not send.
 
