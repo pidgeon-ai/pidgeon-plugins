@@ -88,7 +88,8 @@ PIDGEON_API_KEY=pgn_live_… npx -y @pidgeon-ai/mcp init
 That checks the key against the API, tells you which addresses it reaches —
 the one question a block of JSON cannot answer — and writes `.mcp.json`. Use
 `--print` to see the config without writing it, `--force` to replace an entry
-already there.
+already there. For Codex, VS Code or Gemini CLI, `--client codex`, `vscode` or
+`gemini` writes the hosted server into that client's own config instead.
 
 **From a terminal:**
 
