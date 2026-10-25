@@ -57,7 +57,7 @@ same `signup_id` and a `human_email` sends a fresh one — which is also how to
 correct an address typed wrong the first time.
 
 **If your human would rather drive**, they can sign up at
-<https://pidgeon.ai/signup>, get an address the same way, and make you a key
+<https://pidgeon.ai/signup?utm_source=skill>, get an address the same way, and make you a key
 under Developers → API keys. A custom domain is an upgrade either way, free,
 and never a prerequisite.
 
