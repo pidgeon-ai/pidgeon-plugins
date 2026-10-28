@@ -1,6 +1,6 @@
 {
   "name": "pidgeon",
-  "version": "1.43.1",
+  "version": "1.44.0",
   "description": "Email inboxes for AI agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
   "mcpServers": {
     "pidgeon": {
