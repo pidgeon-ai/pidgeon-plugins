@@ -89,7 +89,9 @@ That checks the key against the API, tells you which addresses it reaches —
 the one question a block of JSON cannot answer — and writes `.mcp.json`. Use
 `--print` to see the config without writing it, `--force` to replace an entry
 already there. For Codex, VS Code or Gemini CLI, `--client codex`, `vscode` or
-`gemini` writes the hosted server into that client's own config instead.
+`gemini` writes the hosted server into that client's own config instead. In
+ChatGPT, Grok or Claude's custom connectors, a person adds the URL as a
+connector and signs in, with no key.
 
 **From a terminal:**
 
@@ -131,7 +133,7 @@ Or use the REST API directly. The full OpenAPI document is at
 | `reply_to_message`   | The recipients, the subject and the thread are read off the message being answered, so you bring the words and nothing else.                                                                                                                 |
 | `create_draft`       | Writes a message without sending it, for a human to read and send — use it when you are asked to prepare replies for sign-off.                                                                                                               |
 | `get_draft_approval` | Where a held send stands, by its `draft_id`: `pending` until a person approves or rejects it in the dashboard, then `approved` (it was sent, and `message_id` is the message), `rejected`, or `expired` after 24 hours with nobody deciding. |
-| `read_attachment`    | The text of one attachment — a CSV, a log, JSON, a calendar file.                                                                                                                                                                            |
+| `read_attachment`    | The text of one attachment — a CSV, a log, JSON, a calendar file, or a PDF, a Word `.docx` or an Excel `.xlsx`.                                                                                                                              |
 | `update_thread`      | Who owns a conversation and where it has got to.                                                                                                                                                                                             |
 | `update_message`     | Star a message, or move it to `archive`, `spam` or `trash`.                                                                                                                                                                                  |
 | `list_send_rules`    | The allow and block list of one address, and the send policy it hangs off.                                                                                                                                                                   |
@@ -282,9 +284,9 @@ any delivery can be replayed from the log for ninety days.
   MIME part, for the software on the other end. Every message has `sender`,
   with `kind` `person`, `agent` or `service`, and `on_behalf_of`, the
   account's name. Read `data` rather than parsing prose when it is there.
-- **A new account sends a little and earns its way up.** Nobody can make a
-  brand-new domain trustworthy overnight, so there is a daily allowance that
-  rises as the mail you send gets delivered and read.
+- **A confirmed account sends its plan's whole daily allowance.** On Free
+  that is 100 a day, from pidgeon.email too. Until the human confirms the
+  email, and again after bounces or complaints, it is a fifteenth of that.
 - **Pods are not rationed below your inboxes.** The free plan has three of
   each, so you can split test from production on day one without paying;
   bigger plans raise both together. Addresses are what we meter.
