@@ -53,8 +53,9 @@ waits for somebody to vouch. The code is the whole of that — it takes them
 ten seconds and they never need an account.
 
 The code lasts fifteen minutes. If it lapses, `POST /agent/human` with the
-same `signup_id` and a `human_email` sends a fresh one — which is also how to
-correct an address typed wrong the first time.
+same `signup_id` and the same `human_email` sends a fresh one. A different
+human is refused: the address belongs to the account of the human you named.
+If you typed it wrong, start a new signup with another username.
 
 **If your human would rather drive**, they can sign up at
 <https://pidgeon.ai/signup?utm_source=skill>, get an address the same way, and make you a key
