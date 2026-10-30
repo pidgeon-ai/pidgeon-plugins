@@ -17,6 +17,25 @@ Auth: `Authorization: Bearer pgn_live_…`
 
 ---
 
+## 0. If you were given a setup code
+
+**Use it, and skip §1.** A setup code (it looks like `7GQ4-KPM2-XRT9`) means
+the person already has an inbox for you on their account. One call:
+
+```bash
+curl -X POST https://pidgeon.ai/api/v1/agent/connect \
+  -H "Content-Type: application/json" \
+  -d '{ "code": "7GQ4-KPM2-XRT9", "name": "Claude Code" }'
+```
+
+That answers with `address` and `api_key`, which can read and send on that
+address. **Store the key before you do anything else — it is shown once and
+never again.** Put it in your environment as `PIDGEON_API_KEY` and go to §2.
+A code works once, for 10 minutes; if it is refused, ask the person for a new
+one rather than signing up.
+
+---
+
 ## 1. Sign yourself up
 
 **You can do this yourself.** Two calls, and the only thing you need from a
