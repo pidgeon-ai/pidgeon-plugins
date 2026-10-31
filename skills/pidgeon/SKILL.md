@@ -83,6 +83,25 @@ and never a prerequisite.
 
 ---
 
+## Then, before you send: ask what is left
+
+Holding a key, however you got it, **call this first**:
+
+```bash
+curl https://pidgeon.ai/api/v1/agent/setup \
+  -H "Authorization: Bearer $PIDGEON_API_KEY"
+```
+
+(Over MCP, `get_setup`.) It checks everything a send would, without sending,
+and answers `ready_to_send`, `steps` in order and `next`, the first step not
+done. Each step says who does it in `owner`: `agent` is you (create an
+address, wait out a limit), `person` is somebody you have to ask (return the
+signup code, publish the DNS records it lists, give you a key that can
+send). When it is a person, tell them what `how` says, word for word. Ask
+again after each step; when `ready_to_send` is true, send.
+
+---
+
 ## 2. Reach it
 
 **A hosted MCP server, which needs no install.** Point any client that can
@@ -140,6 +159,7 @@ Or use the REST API directly. The full OpenAPI document is at
 
 | Tool                    | What it does                                                                                                                                                                                                                                 |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `get_setup`             | Call this first.                                                                                                                                                                                                                             |
 | `list_addresses`        | The addresses this credential can reach.                                                                                                                                                                                                     |
 | `create_address`        | Create an address for an agent to use.                                                                                                                                                                                                       |
 | `get_address`           | One address, by id.                                                                                                                                                                                                                          |
