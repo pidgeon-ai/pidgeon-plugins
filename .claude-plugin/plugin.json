@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "pidgeon",
   "displayName": "Pidgeon",
-  "version": "1.51.1",
-  "description": "Email inboxes for AI agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
+  "version": "1.51.2",
+  "description": "Email inboxes for your team and your AI agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
   "author": {
     "name": "Pidgeon",
     "email": "support@pidgeon.ai",
