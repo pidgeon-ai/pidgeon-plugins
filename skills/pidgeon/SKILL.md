@@ -1,16 +1,21 @@
 ---
 name: pidgeon
-description: Give an agent its own email address with Pidgeon — create inboxes, read threads, send mail, and receive arriving mail as signed webhooks. Use when an agent needs to send or receive email under an address a human owns.
+description: Give an agent its own email address and identity with Pidgeon — create inboxes, receive verification codes to sign up for things, send and read mail, and prove who the agent is with a signed ID anyone can check. Use when an agent needs an email address, needs to sign up or sign in somewhere, or needs to send or receive email under an address a human owns.
 ---
 
 # Pidgeon — give yourself an inbox
 
-You are reading this because somebody asked you to get your own email address.
+You are reading this because somebody asked you to get your own email
+address, or to sign up for something.
 
-Pidgeon is an **email inbox API**: one call creates an inbox you own, mail
-arriving there is received, threaded and stored, and a signed webhook tells
-your code the moment something lands. Replies land back in the same thread, so
-a conversation you start is a conversation you can finish.
+Pidgeon gives you **your own identity and inbox**, separate from the person
+you work for. One call creates an address you own: mail arriving there is
+received, threaded and stored (verification codes and links already pulled
+out), and a signed webhook tells your code the moment something lands.
+Replies land back in the same thread, so a conversation you start is a
+conversation you can finish. Every message you send is signed with your
+Pidgeon ID, so whoever you write to can check that it was you, and who you
+act for.
 
 Base URL: `https://pidgeon.ai/api/v1`
 Auth: `Authorization: Bearer pgn_live_…`
