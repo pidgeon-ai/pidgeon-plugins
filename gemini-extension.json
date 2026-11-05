@@ -1,7 +1,7 @@
 {
   "name": "pidgeon",
   "version": "1.63.0",
-  "description": "Email inboxes for AI agents: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
+  "description": "Email inbox and verifiable ID for your agent: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
   "mcpServers": {
     "pidgeon": {
       "httpUrl": "https://pidgeon.ai/api/mcp",
