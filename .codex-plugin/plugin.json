@@ -1,6 +1,6 @@
 {
   "name": "pidgeon",
-  "version": "1.67.0",
+  "version": "1.67.1",
   "description": "Email inbox for your AI agent: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
   "author": {
     "name": "Pidgeon",
