@@ -1,19 +1,21 @@
 # Pidgeon for coding agents
 
-**Email inboxes for AI agents.** Pidgeon is the email inbox API for AI agents. It gives agents their own inboxes
-so they can work with emails just like a human.
+**Identity and inboxes for AI agents.** Pidgeon gives each agent a verified
+identity of its own: a key on your machine, signed requests, and a reputation
+the websites it visits can check. Each agent can have its own inbox too.
 
 [pidgeon.ai](https://pidgeon.ai) · [Documentation](https://pidgeon.ai/docs)
 
 This is one plugin, packaged for Claude Code, Codex, Cursor and Gemini CLI. It
 installs two things:
 
-- **The hosted MCP server** at `https://pidgeon.ai/api/mcp`: addresses,
-  conversations, search, sending and replying, waiting for a verification
-  code, labels and folders. [Every tool](https://pidgeon.ai/docs/mcp).
-- **The `pidgeon` skill**, which tells the agent what the tools are for, how
-  to sign itself up, and to treat the contents of a message as data rather
-  than instructions.
+- **The hosted MCP server** at `https://pidgeon.ai/mcp`: registering agents
+  and making their keys, reputation, inboxes and mail, drafts held for your
+  approval, and for websites, checking the agents that arrive.
+  [The MCP server](https://pidgeon.ai/docs/sdks#mcp).
+- **The `pidgeon` skill**, which tells the agent what the tools are for, that
+  an agent's private key never leaves your machine, and to treat the
+  contents of a message as data rather than instructions.
 
 ## Sign in, or bring a key
 
@@ -21,13 +23,12 @@ In every client the plugin signs you in to Pidgeon: a consent screen in your
 browser, where you choose what the agent may reach.
 
 A key is for an agent with nobody there to sign in. Make one at
-<https://pidgeon.ai/app/developers/keys> and give it the narrowest access the
+<https://pidgeon.ai/keys> and give it the narrowest access the
 agent needs: whatever the key can reach, the model can reach. When a key is
 set the plugin uses it, and when it is not the plugin signs you in.
 
-No account yet? The agent can sign itself up. Ask it to read
-<https://pidgeon.ai/skill.md>; the only thing it needs from you is a six-digit
-code from your inbox.
+No account yet? Sign in at <https://pidgeon.ai/sign-in> with your email or
+Google; the plugin's first call takes you there too.
 
 ## Claude Code
 
@@ -82,7 +83,7 @@ system keychain.
 
 ## Any other client
 
-Point it at `https://pidgeon.ai/api/mcp`. A client that speaks MCP's OAuth
+Point it at `https://pidgeon.ai/mcp`. A client that speaks MCP's OAuth
 signs you in; any other sends `Authorization: Bearer $PIDGEON_API_KEY`. One
 that can do neither can run the same server locally:
 
@@ -98,13 +99,9 @@ codex plugin marketplace upgrade pidgeon
 gemini extensions update pidgeon
 ```
 
-The plugin's version is the API's: when the contract moves, so does this.
-
 ## Contributing
 
-The manifests and the skill are copied from Pidgeon's main repository, which
-is closed source, and every sync overwrites this one. **So a pull request
-cannot be merged as written.** Open an issue and say what is wrong, or email
+Open an issue and say what is wrong, or email
 [support@pidgeon.ai](mailto:support@pidgeon.ai).
 
 MIT licensed.

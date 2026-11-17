@@ -10,9 +10,16 @@
     {
       "name": "pidgeon",
       "source": "./",
-      "description": "Email inbox for your AI agent. Every tool of the hosted MCP server, plus the skill that explains how to get a key.",
+      "description": "Pidgeon for your agent: identity, keys and reputation (Passport), inboxes and mail. Every tool of the hosted MCP server, plus the skill.",
       "category": "productivity",
-      "tags": ["email", "inbox", "webhooks", "agents", "mcp"]
+      "tags": [
+        "agents",
+        "identity",
+        "passport",
+        "email",
+        "inbox",
+        "mcp"
+      ]
     }
   ]
 }

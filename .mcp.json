@@ -2,8 +2,10 @@
   "mcpServers": {
     "pidgeon": {
       "type": "http",
-      "url": "https://pidgeon.ai/api/mcp",
-      "env_http_headers": { "x-api-key": "PIDGEON_API_KEY" }
+      "url": "https://pidgeon.ai/mcp",
+      "env_http_headers": {
+        "x-api-key": "PIDGEON_API_KEY"
+      }
     }
   }
 }

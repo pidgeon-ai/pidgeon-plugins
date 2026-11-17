@@ -2,29 +2,36 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "pidgeon",
   "displayName": "Pidgeon",
-  "version": "1.68.0",
-  "description": "Email inbox for your AI agent: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
+  "version": "2.0.0",
+  "description": "Give AI agents their own identity and inbox: registered, keyed on your machine, reputation read.",
   "author": {
     "name": "Pidgeon",
     "email": "support@pidgeon.ai",
     "url": "https://pidgeon.ai"
   },
-  "homepage": "https://pidgeon.ai/docs/mcp",
+  "homepage": "https://pidgeon.ai/docs/sdks#mcp",
   "repository": "https://github.com/pidgeon-ai/pidgeon-plugins",
   "license": "MIT",
-  "keywords": ["email", "inbox", "webhooks", "agents", "mcp"],
+  "keywords": [
+    "agents",
+    "identity",
+    "passport",
+    "email",
+    "inbox",
+    "mcp"
+  ],
   "userConfig": {
     "api_key": {
       "type": "string",
       "title": "Pidgeon API key",
-      "description": "Optional. Leave it empty and Claude Code signs you in to Pidgeon instead. For an agent with nobody there to sign in, a key from https://pidgeon.ai/app/developers/keys, with the narrowest access the agent needs.",
+      "description": "Optional. Leave it empty and Claude Code signs you in to Pidgeon instead. For an agent with nobody there to sign in, a key from https://pidgeon.ai/keys, with the narrowest access the agent needs.",
       "sensitive": true
     }
   },
   "mcpServers": {
     "pidgeon": {
       "type": "http",
-      "url": "https://pidgeon.ai/api/mcp",
+      "url": "https://pidgeon.ai/mcp",
       "headers": {
         "x-api-key": "${user_config.api_key}"
       }

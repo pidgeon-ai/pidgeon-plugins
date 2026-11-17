@@ -1,10 +1,10 @@
 {
   "name": "pidgeon",
-  "version": "1.68.0",
-  "description": "Email inbox for your AI agent: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
+  "version": "2.0.0",
+  "description": "Give AI agents their own identity and inbox: registered, keyed on your machine, reputation read.",
   "mcpServers": {
     "pidgeon": {
-      "httpUrl": "https://pidgeon.ai/api/mcp",
+      "httpUrl": "https://pidgeon.ai/mcp",
       "headers": {
         "x-api-key": "${PIDGEON_API_KEY}"
       }
@@ -13,7 +13,7 @@
   "settings": [
     {
       "name": "Pidgeon API key",
-      "description": "Optional. Leave it empty and sign in with /mcp auth pidgeon instead. For an agent with nobody there to sign in, a key from https://pidgeon.ai/app/developers/keys, with the narrowest access the agent needs.",
+      "description": "Optional. Leave it empty and sign in with /mcp auth pidgeon instead. For an agent with nobody there to sign in, a key from https://pidgeon.ai/keys, with the narrowest access the agent needs.",
       "envVar": "PIDGEON_API_KEY",
       "sensitive": true
     }

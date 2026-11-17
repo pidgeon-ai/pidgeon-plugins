@@ -1,28 +1,29 @@
 {
   "name": "pidgeon",
-  "version": "1.68.0",
-  "description": "Email inbox for your AI agent: create addresses, read threads, send mail, and receive arriving mail as signed webhooks.",
+  "version": "2.0.0",
+  "description": "Give AI agents their own identity and inbox: registered, keyed on your machine, reputation read.",
   "author": {
     "name": "Pidgeon",
     "email": "support@pidgeon.ai",
     "url": "https://pidgeon.ai"
   },
-  "homepage": "https://pidgeon.ai/docs/mcp",
+  "homepage": "https://pidgeon.ai/docs/sdks#mcp",
   "repository": "https://github.com/pidgeon-ai/pidgeon-plugins",
   "license": "MIT",
   "keywords": [
+    "agents",
+    "identity",
+    "passport",
     "email",
     "inbox",
-    "webhooks",
-    "agents",
     "mcp"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Pidgeon",
-    "shortDescription": "Email inboxes for AI agents",
-    "longDescription": "Give your agent its own email address. It can create addresses, read and search conversations, send and reply, wait for a verification code to arrive, and file what it has handled. Every tool goes through Pidgeon's hosted MCP server with your API key, so the agent can reach only the addresses that key reaches.",
+    "shortDescription": "Identity and inboxes for AI agents",
+    "longDescription": "Give your agent an identity of its own: register it, make its key on your machine, and read its reputation, so the websites it visits can check who stands behind it. Give it an inbox too: addresses, conversations, sending and replies, and drafts held for your approval. Every tool goes through Pidgeon's hosted MCP server with your sign-in or API key, so the agent reaches only what that key reaches.",
     "developerName": "Pidgeon",
     "category": "Productivity",
     "capabilities": [
@@ -33,9 +34,9 @@
     "privacyPolicyURL": "https://pidgeon.ai/legal/privacy",
     "termsOfServiceURL": "https://pidgeon.ai/legal/terms",
     "defaultPrompt": [
-      "List my Pidgeon addresses and summarise the newest conversations.",
-      "Create an address for this project and wait for the verification email.",
-      "Reply to the latest message in my support inbox."
+      "Register this agent with Pidgeon and make its key here.",
+      "What is my operator reputation on Pidgeon?",
+      "Make an inbox for this agent and wait for the verification email."
     ],
     "brandColor": "#1C1917",
     "composerIcon": "./assets/logo.svg",
