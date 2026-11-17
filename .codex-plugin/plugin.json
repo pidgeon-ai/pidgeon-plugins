@@ -10,14 +10,7 @@
   "homepage": "https://pidgeon.ai/docs/sdks#mcp",
   "repository": "https://github.com/pidgeon-ai/pidgeon-plugins",
   "license": "MIT",
-  "keywords": [
-    "agents",
-    "identity",
-    "passport",
-    "email",
-    "inbox",
-    "mcp"
-  ],
+  "keywords": ["agents", "identity", "passport", "email", "inbox", "mcp"],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
@@ -26,10 +19,7 @@
     "longDescription": "Give your agent an identity of its own: register it, make its key on your machine, and read its reputation, so the websites it visits can check who stands behind it. Give it an inbox too: addresses, conversations, sending and replies, and drafts held for your approval. Every tool goes through Pidgeon's hosted MCP server with your sign-in or API key, so the agent reaches only what that key reaches.",
     "developerName": "Pidgeon",
     "category": "Productivity",
-    "capabilities": [
-      "Read",
-      "Write"
-    ],
+    "capabilities": ["Read", "Write"],
     "websiteURL": "https://pidgeon.ai",
     "privacyPolicyURL": "https://pidgeon.ai/legal/privacy",
     "termsOfServiceURL": "https://pidgeon.ai/legal/terms",

@@ -12,14 +12,7 @@
       "source": "./",
       "description": "Pidgeon for your agent: identity, keys and reputation (Passport), inboxes and mail. Every tool of the hosted MCP server, plus the skill.",
       "category": "productivity",
-      "tags": [
-        "agents",
-        "identity",
-        "passport",
-        "email",
-        "inbox",
-        "mcp"
-      ]
+      "tags": ["agents", "identity", "passport", "email", "inbox", "mcp"]
     }
   ]
 }

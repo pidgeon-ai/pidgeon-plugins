@@ -10,14 +10,7 @@
   "homepage": "https://pidgeon.ai/docs/sdks#mcp",
   "repository": "https://github.com/pidgeon-ai/pidgeon-plugins",
   "license": "MIT",
-  "keywords": [
-    "agents",
-    "identity",
-    "passport",
-    "email",
-    "inbox",
-    "mcp"
-  ],
+  "keywords": ["agents", "identity", "passport", "email", "inbox", "mcp"],
   "logo": "assets/logo.svg",
   "skills": "./skills/",
   "mcpServers": {
