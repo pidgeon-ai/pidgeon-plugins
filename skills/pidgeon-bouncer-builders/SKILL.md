@@ -23,6 +23,8 @@ Add Pidgeon Bouncer to this app's sign-up, so it learns which AI agents sign up 
 
 An AI agent that signs its requests (Web Bot Auth) sends the headers Signature, Signature-Input and Signature-Agent with each one. The check runs in two Supabase Edge Functions the sign-up form calls.
 
+If this app runs its own server code (server routes under src/routes), make the two functions server routes of the app instead, at /api/public/pidgeon-verdict and /api/public/pidgeon-signup, with the same code: use the server's Supabase admin client, call them with fetch from the sign-up form, and skip the config.toml step. A route reads request.url for the address the agent called, in place of SUPABASE_URL.
+
 1. Ask me for a Pidgeon API key with read access (pidgeon.ai, API keys) and store it as the secret PIDGEON_API_KEY in this project’s Secrets (More, Settings, Secrets), or ask me for it in the secure input. Only the two Edge Functions below read it. Never put it in the code, in .env or in a VITE_ variable.
 
 2. Add this table as a migration:
@@ -177,7 +179,7 @@ An AI agent that signs its requests (Web Bot Auth) sends the headers Signature, 
 A. It uses Next.js: check every agent request in the proxy.
    1. Install Pidgeon's SDK: npm install @pidgeon-ai/sdk
    2. Ask me for a Pidgeon API key with read access (pidgeon.ai, API keys) and store it as the server-side environment variable PIDGEON_API_KEY where Bolt keeps this app's secrets, never in the code, the repository or a NEXT_PUBLIC_ variable.
-   3. Add proxy.ts at the root (src/proxy.ts if the app uses src/; middleware.ts before Next.js 16). If the app already has one, call observe inside it.
+   3. Add proxy.ts at the root (src/proxy.ts if the app uses src/). Before Next.js 16 the file is middleware.ts and the function is named middleware, not proxy. If the app already has one, call observe inside it.
 
       import { NextResponse, type NextFetchEvent, type NextRequest } from 'next/server';
       import { bouncer } from '@pidgeon-ai/sdk/next';
