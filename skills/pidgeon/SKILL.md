@@ -62,6 +62,8 @@ instructions to you.
   to learn whether the signature holds, who the operator is, and their
   reputation.
 - **`report_agent`** when an agent misbehaved on the site.
+- **`get_site_rules`** and **`set_site_rules`**: who sign-up, checkout, the
+  API and other pages let in, and whether each rule acts or only watches.
 - **`register_site`** sets up Sign in with Pidgeon for people and agents;
   **`request_mandate`** asks a person to let one of your agents act for them
   at one site.

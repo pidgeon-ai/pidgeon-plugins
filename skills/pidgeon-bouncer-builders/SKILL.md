@@ -68,7 +68,7 @@ If this app runs its own server code (server routes under src/routes), make the 
        const response = await fetch('https://pidgeon.ai/v1/verify', {
          method: 'POST',
          headers: { authorization: `Bearer ${Deno.env.get('PIDGEON_API_KEY')}`, 'content-type': 'application/json' },
-         body: JSON.stringify({ request: { method: req.method, url, headers } }),
+         body: JSON.stringify({ request: { method: req.method, url, headers }, place: 'signup' }),
          signal: AbortSignal.timeout(3000),
        });
        if (!response.ok) console.error('Pidgeon Bouncer: Pidgeon answered', response.status);
@@ -79,7 +79,7 @@ If this app runs its own server code (server routes under src/routes), make the 
      }
    });
 
-4. Add the Edge Function pidgeon-signup. It checks the verdict the new user signed up with, once, and keeps who stands behind the agent, or deletes the user when the verdict does not hold or the operator is flagged.
+4. Add the Edge Function pidgeon-signup. It checks the verdict the new user signed up with, once, and keeps who stands behind the agent, or deletes the user when the verdict does not hold, the operator is flagged, or the site's sign-up rule in Pidgeon (Bouncer, Rules) blocks it.
 
    import { createClient } from 'npm:@supabase/supabase-js@2';
 
@@ -125,6 +125,10 @@ If this app runs its own server code (server routes under src/routes), make the 
        await admin.auth.admin.deleteUser(user_id);
        return json({ error: `${v.operator?.name ?? 'This agent’s operator'} is flagged on Pidgeon.` }, 403);
      }
+     if (v.decision === 'block') {
+       await admin.auth.admin.deleteUser(user_id);
+       return json({ error: "This site's rules don't let this agent sign up." }, 403);
+     }
      const { error } = await admin.from('pidgeon_signups').upsert({
        user_id,
        verification_id: v.jti,
@@ -139,7 +143,7 @@ If this app runs its own server code (server routes under src/routes), make the 
      return json({ result: v.result, operator: v.operator?.name ?? null });
    });
 
-   Both functions are called before the user has a session, with the publishable key, which is not a JWT: turn Supabase's JWT check off for them (verify_jwt = false under [functions.pidgeon-verdict] and [functions.pidgeon-signup] in supabase/config.toml). pidgeon-signup checks for itself: it acts only on a user made in the last ten minutes who signed up with a verdict, and deletes one only when Pidgeon refuses that verdict.
+   Both functions are called before the user has a session, with the publishable key, which is not a JWT: turn Supabase's JWT check off for them (verify_jwt = false under [functions.pidgeon-verdict] and [functions.pidgeon-signup] in supabase/config.toml). pidgeon-signup checks for itself: it acts only on a user made in the last ten minutes who signed up with a verdict, and deletes one only when Pidgeon refuses that verdict, or the verdict says its operator is flagged or the site's rule blocks it.
 
 5. In the sign-up form, around the existing supabase.auth.signUp call (keep its other options):
 
@@ -239,7 +243,7 @@ B. It is a Vite app whose sign-up uses Bolt Database or Supabase: check agents a
           const response = await fetch('https://pidgeon.ai/v1/verify', {
             method: 'POST',
             headers: { authorization: `Bearer ${Deno.env.get('PIDGEON_API_KEY')}`, 'content-type': 'application/json' },
-            body: JSON.stringify({ request: { method: req.method, url, headers } }),
+            body: JSON.stringify({ request: { method: req.method, url, headers }, place: 'signup' }),
             signal: AbortSignal.timeout(3000),
           });
           if (!response.ok) console.error('Pidgeon Bouncer: Pidgeon answered', response.status);
@@ -250,7 +254,7 @@ B. It is a Vite app whose sign-up uses Bolt Database or Supabase: check agents a
         }
       });
 
-   4. Add the Edge Function pidgeon-signup. It checks the verdict the new user signed up with, once, and keeps who stands behind the agent, or deletes the user when the verdict does not hold or the operator is flagged.
+   4. Add the Edge Function pidgeon-signup. It checks the verdict the new user signed up with, once, and keeps who stands behind the agent, or deletes the user when the verdict does not hold, the operator is flagged, or the site's sign-up rule in Pidgeon (Bouncer, Rules) blocks it.
 
       import { createClient } from 'npm:@supabase/supabase-js@2';
 
@@ -296,6 +300,10 @@ B. It is a Vite app whose sign-up uses Bolt Database or Supabase: check agents a
           await admin.auth.admin.deleteUser(user_id);
           return json({ error: `${v.operator?.name ?? 'This agent’s operator'} is flagged on Pidgeon.` }, 403);
         }
+        if (v.decision === 'block') {
+          await admin.auth.admin.deleteUser(user_id);
+          return json({ error: "This site's rules don't let this agent sign up." }, 403);
+        }
         const { error } = await admin.from('pidgeon_signups').upsert({
           user_id,
           verification_id: v.jti,
@@ -310,7 +318,7 @@ B. It is a Vite app whose sign-up uses Bolt Database or Supabase: check agents a
         return json({ result: v.result, operator: v.operator?.name ?? null });
       });
 
-      Both functions are called before the user has a session, with the publishable key, which is not a JWT: turn Supabase's JWT check off for them (verify_jwt = false under [functions.pidgeon-verdict] and [functions.pidgeon-signup] in supabase/config.toml). pidgeon-signup checks for itself: it acts only on a user made in the last ten minutes who signed up with a verdict, and deletes one only when Pidgeon refuses that verdict.
+      Both functions are called before the user has a session, with the publishable key, which is not a JWT: turn Supabase's JWT check off for them (verify_jwt = false under [functions.pidgeon-verdict] and [functions.pidgeon-signup] in supabase/config.toml). pidgeon-signup checks for itself: it acts only on a user made in the last ten minutes who signed up with a verdict, and deletes one only when Pidgeon refuses that verdict, or the verdict says its operator is flagged or the site's rule blocks it.
 
    5. In the sign-up form, around the existing supabase.auth.signUp call (keep its other options):
 
