@@ -362,7 +362,7 @@ An AI agent that signs its requests (Web Bot Auth) sends the headers Signature, 
 3. Add this middleware (server/pidgeon.ts, or next to the server's other middleware):
 
    import type { NextFunction, Request, Response } from 'express';
-   import { Pidgeon, PidgeonError, type VerifyAnswer } from '@pidgeon-ai/sdk';
+   import { Pidgeon, PidgeonError, declaredAgentToken, type VerifyAnswer } from '@pidgeon-ai/sdk';
 
    declare global {
      namespace Express {
@@ -375,13 +375,20 @@ An AI agent that signs its requests (Web Bot Auth) sends the headers Signature, 
    const pidgeon = process.env.PIDGEON_API_KEY ? new Pidgeon({ apiKey: process.env.PIDGEON_API_KEY }) : null;
    const NOT_SENT = new Set(['cookie', 'authorization', 'proxy-authorization']);
 
-   /** Asks Pidgeon about each request an agent signed, once. People's requests are never sent. */
+   /** Asks Pidgeon about each request an agent signed, and records each visit of an agent that names itself (ChatGPT-User, Claude-User). People's requests are never sent. */
    export async function pidgeonBouncer(req: Request, _res: Response, next: NextFunction) {
      req.pidgeon = null;
-     const agent = req.headers['signature'] || req.headers['signature-agent'];
-     if (!pidgeon || !agent || req.method === 'OPTIONS') return next();
+     const signed = req.headers['signature'] || req.headers['signature-agent'];
+     const declared = declaredAgentToken(req.get('user-agent'));
+     if (!pidgeon || (!signed && !declared) || req.method === 'OPTIONS') return next();
      // The address the agent called: the public host, as Replit's proxy passes it on.
      const host = req.get('x-forwarded-host') ?? req.get('host');
+     if (!signed) {
+       // It only names itself: nothing to check, so record the visit (path only) without waiting.
+       const path = req.originalUrl.split('?')[0];
+       pidgeon.visits.record([{ method: req.method, url: `https://${host}${path}`, user_agent: req.get('user-agent') ?? '' }]).catch(() => undefined);
+       return next();
+     }
      const headers: Record<string, string> = {};
      for (const [name, value] of Object.entries(req.headers)) {
        if (value !== undefined && !NOT_SENT.has(name)) headers[name] = Array.isArray(value) ? value.join(', ') : value;
@@ -406,7 +413,7 @@ An AI agent that signs its requests (Web Bot Auth) sends the headers Signature, 
    }
 
 4. Register pidgeonBouncer with app.use before the routes, and put onlyTrustedAgents on the routes where an agent acts: sign-up, sign-in, checkout, forms and the API. Leave pages and assets open: crawlers that don't sign yet must get what they get today.
-5. Where it helps, read req.pidgeon in a route: answer.valid is true for an agent Pidgeon verified, with answer.operator (name, verification: none, domain, kyc or kyb) and answer.reputation.band (unverified, new, good or flagged). answer.result signed_known or signed_unknown is an agent outside Pidgeon whose signature holds; answer.signature_agent names its directory.
+5. Where it helps, read req.pidgeon in a route: answer.valid is true for an agent Pidgeon verified, with answer.operator (name, verification: none, domain, kyc or kyb) and answer.reputation.band (unverified, new, good or flagged). answer.result signed_known or signed_unknown is an agent outside Pidgeon whose signature holds; answer.signature_agent names its directory. Agents that only name themselves are recorded, not checked, so req.pidgeon stays null for them.
 6. For a Python server, do the same in a before-request hook: pidgeon.Pidgeon(api_key=os.environ["PIDGEON_API_KEY"]).verify(method, url, headers), with the same url and headers.
 7. Check it: a normal page visit makes no call to Pidgeon, and an agent's request does once.
 
@@ -414,22 +421,25 @@ Docs: https://pidgeon.ai/docs/bouncer#replit
 
 ## Any other server
 
-Add Pidgeon Bouncer to this server, so it learns which AI agents are calling it and who stands behind them.
+Add Pidgeon Bouncer to this server, so it sees which AI agents are calling it and who runs them, and acts on the site rules set in Pidgeon.
 
 1. Install Pidgeon's SDK: `npm install @pidgeon-ai/sdk` for TypeScript, or `pip install pidgeon` for Python.
 2. Read the API key from the environment variable PIDGEON_API_KEY. Never put it in the code or the repository.
-3. In a middleware that runs before the routes that matter (sign-ups, checkout, forms, APIs), when a request carries a Signature-Agent header, ask Pidgeon about it before handling it:
+3. In a middleware that runs before the routes that matter (sign-ups, checkout, forms, APIs), when a request carries a Signature-Agent header, or its User-Agent names a known agent (declaredAgentToken from the SDK returns its name), ask Pidgeon about it before handling it:
      import { Pidgeon } from '@pidgeon-ai/sdk';
      const pidgeon = new Pidgeon({ apiKey: process.env.PIDGEON_API_KEY });
-     const answer = await pidgeon.verify(request);
+     const answer = await pidgeon.verify(request, { place: 'signup' });
+   place says where the request is: signup, checkout, api or other. Python: pidgeon.verify(method, url, headers, place="signup").
    The url must be absolute, as the agent called it (https://your.host/path?query): Node's req.url is only the path, so build it from the public host. Header values that are arrays are joined with ", ".
    Without the SDK: POST https://pidgeon.ai/v1/verify with "Authorization: Bearer $PIDGEON_API_KEY" and the body
-     {"request": {"method": "...", "url": "...", "headers": {"signature": "...", "signature-input": "...", "signature-agent": "..."}}}
+     {"request": {"method": "...", "url": "...", "headers": {"signature": "...", "signature-input": "...", "signature-agent": "..."}}, "place": "signup"}
    Verify each request once: a signature with a nonce answers valid: false, reason replayed the second time.
-4. Decide with the answer:
-   - answer.valid is true: answer.operator says who stands behind the agent (name, verification: none, domain, kyc or kyb) and answer.reputation.band their reputation (unverified, new, good or flagged). Let a good reputation through; treat flagged as you would a bad actor. A suspended operator's agents answer valid: false, reason revoked.
-   - answer.valid is false: the signature didn't check out (answer.reason). Treat it as an anonymous bot.
-   - Requests without a Signature-Agent header are not agents Pidgeon knows: leave them to your existing rules.
+4. Act on answer.decision, which the site rule for that place decided (the site owner sets the rules in Pidgeon, Bouncer → Rules):
+   - allow: let it in, and skip the site's own friction (a CAPTCHA, a review).
+   - block: turn it away. answer.rule says why.
+   - limit: leave it to your existing rules (Pidgeon couldn't confirm who it is, or the place is a public page, which never blocks).
+   - watch: the place only watches (answer.would says what it would have decided). Let it through.
+   - Requests that neither sign nor name a known agent are left to your existing rules, and are never sent to Pidgeon.
 5. If Pidgeon can't be reached (a network error, a 5xx or a 429), let the request through to your existing rules rather than failing it. A 401, 402 or 403 is this server's setup (the key, its access, billing), not an outage: never let agents through on it; log it loudly and treat the agent as unverified until it is fixed.
 
 Docs: https://pidgeon.ai/docs
