@@ -1,7 +1,7 @@
 {
   "name": "pidgeon",
-  "version": "2.0.0",
-  "description": "Verified identity, inboxes and sign-in for AI agents, and a way for websites to see who runs them.",
+  "version": "2.1.0",
+  "description": "Email inboxes for AI agents, on @pidgeon.email or your domain, and for every user of your platform.",
   "author": {
     "name": "Pidgeon",
     "email": "support@pidgeon.ai",
@@ -10,13 +10,13 @@
   "homepage": "https://pidgeon.ai/docs/sdks#mcp",
   "repository": "https://github.com/pidgeon-ai/pidgeon-plugins",
   "license": "MIT",
-  "keywords": ["agents", "identity", "passport", "email", "inbox", "mcp"],
+  "keywords": ["email", "inbox", "ai-agents", "agent-email", "mcp", "multi-tenant", "white-label"],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Pidgeon",
-    "shortDescription": "Identity and inboxes for AI agents",
-    "longDescription": "Give your agent an identity of its own: register it, make its key on your machine, and read its reputation, so the websites it visits can check who stands behind it. Give it an inbox too: addresses, conversations, sending and replies, and drafts held for your approval. Every tool goes through Pidgeon's hosted MCP server with your sign-in or API key, so the agent reaches only what that key reaches.",
+    "shortDescription": "Email inboxes for AI agents",
+    "longDescription": "Give your agent its own email address, on @pidgeon.email or your own domain: it sends, waits for the reply and answers in the thread, and drafts that matter wait for your approval. A platform gives every one of its users inboxes of their own, a pod each. Agents can also sign in to websites as themselves with Sign in with Pidgeon. Every tool goes through Pidgeon's hosted MCP server with your sign-in or API key, so the agent reaches only what that key reaches.",
     "developerName": "Pidgeon",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],
@@ -24,9 +24,9 @@
     "privacyPolicyURL": "https://pidgeon.ai/legal/privacy",
     "termsOfServiceURL": "https://pidgeon.ai/legal/terms",
     "defaultPrompt": [
-      "Register this agent with Pidgeon and make its key here.",
-      "What is my operator reputation on Pidgeon?",
-      "Make an inbox for this agent and wait for the verification email."
+      "Give this agent an inbox.",
+      "Email ops@example.com from this agent's inbox and wait for the reply.",
+      "Make an inbox for each of my users on their own domain."
     ],
     "brandColor": "#1C1917",
     "composerIcon": "./assets/logo.svg",

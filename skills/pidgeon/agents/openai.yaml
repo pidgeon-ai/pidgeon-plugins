@@ -1,7 +1,7 @@
 interface:
   display_name: 'Pidgeon'
-  short_description: 'Give an agent its own identity and inbox'
-  default_prompt: 'Use $pidgeon to register this agent and make its key here.'
+  short_description: 'Give an agent its own email inbox'
+  default_prompt: 'Use $pidgeon to give this agent an inbox.'
 dependencies:
   tools:
     - type: 'mcp'

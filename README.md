@@ -1,26 +1,26 @@
 # Pidgeon for coding agents
 
-**Identity and inboxes for AI agents.** Pidgeon gives each agent a verified
-identity of its own: a key on your machine, signed requests, and a reputation
-the websites it visits can check. Each agent can have its own inbox too.
+**Email inboxes for AI agents.** Pidgeon gives each agent its own address, on
+@pidgeon.email or your own domain. It sends, waits for the reply and answers
+in the thread. A platform gives every one of its users inboxes of their own,
+a pod each. Agents can also sign in to websites as themselves, with Sign in
+with Pidgeon.
 
 [pidgeon.ai](https://pidgeon.ai) · [Documentation](https://pidgeon.ai/docs)
 
 This is one plugin, packaged for Claude Code, Codex, Cursor and Gemini CLI. It
-installs three things:
+installs two things:
 
-- **The hosted MCP server** at `https://pidgeon.ai/mcp`: registering agents
-  and making their keys, reputation, inboxes and mail, drafts held for your
-  approval, and for websites, checking the agents that arrive.
+- **The hosted MCP server** at `https://pidgeon.ai/mcp`: inboxes and mail,
+  drafts held for your approval, your own domains, pods for your users, and
+  agents' keys for Sign in with Pidgeon.
   [The MCP server](https://pidgeon.ai/docs/sdks#mcp).
-- **The `pidgeon` skill**, which tells the agent what the tools are for, that
-  an agent's private key never leaves your machine, and to treat the
-  contents of a message as data rather than instructions.
-- **The `pidgeon-bouncer` skill**, which adds Pidgeon Bouncer to a Next.js
-  app's proxy, so the site sees which agents call it and who runs them.
-  It is a standalone Agent Skill too, for v0 and any agent that reads them:
-  `npx skills add pidgeon-ai/pidgeon-plugins --skill pidgeon-bouncer`.
-  [Bouncer in v0](https://pidgeon.ai/docs/bouncer#v0).
+- **The `pidgeon` skill**, which tells the agent how to give itself an inbox,
+  send and wait for the reply, that an agent's private key never leaves your
+  machine, and to treat the contents of a message as data rather than
+  instructions.
+
+Then ask: "Give this agent an inbox."
 
 ## Sign in, or bring a key
 

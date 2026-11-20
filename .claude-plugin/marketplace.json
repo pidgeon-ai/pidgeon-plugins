@@ -10,9 +10,10 @@
     {
       "name": "pidgeon",
       "source": "./",
-      "description": "Pidgeon for your agent: identity, keys and reputation (Passport), inboxes and mail. Every tool of the hosted MCP server, plus the skill.",
+      "description": "Email inboxes for your agents: addresses on @pidgeon.email or your domain, sending, replies and arriving mail, and a pod per user for platforms. Every tool of the hosted MCP server, plus the skill.",
+      "skills": ["./skills/pidgeon"],
       "category": "productivity",
-      "tags": ["agents", "identity", "passport", "email", "inbox", "mcp"]
+      "tags": ["email", "inbox", "ai-agents", "agent-email", "mcp", "multi-tenant", "white-label"]
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "name": "pidgeon",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "displayName": "Pidgeon",
-  "description": "Verified identity, inboxes and sign-in for AI agents, and a way for websites to see who runs them.",
+  "description": "Email inboxes for AI agents, on @pidgeon.email or your domain, and for every user of your platform.",
   "author": {
     "name": "Pidgeon",
     "email": "support@pidgeon.ai"
@@ -10,7 +10,7 @@
   "homepage": "https://pidgeon.ai/docs/sdks#mcp",
   "repository": "https://github.com/pidgeon-ai/pidgeon-plugins",
   "license": "MIT",
-  "keywords": ["agents", "identity", "passport", "email", "inbox", "mcp"],
+  "keywords": ["email", "inbox", "ai-agents", "agent-email", "mcp", "multi-tenant", "white-label"],
   "logo": "assets/logo.svg",
   "skills": "./skills/",
   "mcpServers": {
