@@ -18,7 +18,7 @@
     "shortDescription": "Email inboxes for AI agents",
     "longDescription": "Give your agent its own email address, on @pidgeon.email or your own domain: it sends, waits for the reply and answers in the thread, and drafts that matter wait for your approval. A platform gives every one of its users inboxes of their own, a pod each. Agents can also sign in to websites as themselves with Sign in with Pidgeon. Every tool goes through Pidgeon's hosted MCP server with your sign-in or API key, so the agent reaches only what that key reaches.",
     "developerName": "Pidgeon",
-    "category": "Productivity",
+    "category": "Communication",
     "capabilities": ["Read", "Write"],
     "websiteURL": "https://pidgeon.ai",
     "privacyPolicyURL": "https://pidgeon.ai/legal/privacy",
